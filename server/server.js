@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 
 
 // Configuración global de rutas
-app.use(require('./routes/index'));
+app.use('/api', require('./routes/index'));
 
 
 
