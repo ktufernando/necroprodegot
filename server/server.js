@@ -21,6 +21,10 @@ app.use(bodyParser.json());
 // habilitar la carpeta public
 app.use(express.static(path.resolve(__dirname, '../public')));
 
+app.get('/*', function(req,res) {
+    res.sendFile(path.join(__dirname + '..public/index.html'));
+});
+
 
 // Configuración global de rutas
 app.use(require('./routes/index'));
