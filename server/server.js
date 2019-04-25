@@ -19,7 +19,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 // habilitar la carpeta public
-//app.use(express.static(path.resolve(__dirname, '../public')));
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 /*app.get('/*', function(req,res) {
     res.sendFile(path.join(__dirname + '..public/index.html'));
@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 
 
 // Configuración global de rutas
-app.use('/api', require('./routes/index'));
+app.use(require('./routes/index'));
 
 
 

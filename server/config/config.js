@@ -28,11 +28,5 @@ process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
 // ============================
 //  Base de datos
 // ============================
-let urlDB;
-
-if (process.env.NODE_ENV === 'dev') {
-    urlDB = 'mongodb+srv://app:hruhiAK5UzZHxxCp@cluster0-dm1ku.mongodb.net/necroprode?retryWrites=true';
-} else {
-    urlDB = process.env.MONGO_URI;
-}
+let urlDB = 'mongodb+srv://app:hruhiAK5UzZHxxCp@cluster0-dm1ku.mongodb.net/necroprode?retryWrites=true';
 process.env.URLDB = urlDB;
