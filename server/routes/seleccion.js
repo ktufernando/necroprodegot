@@ -3,6 +3,7 @@ const express = require('express');
 
 let app = express();
 let Seleccion = require('../models/seleccion');
+let Personaje = require('../models/personaje');
 
 
 // ===========================
@@ -25,6 +26,43 @@ app.get('/seleccion/:usuario', (req, res) => {
                 ok: true,
                 selecciones: s
             });
+
+
+        })
+
+});
+
+let getNames = (selecciones) => {
+    return new Promise((resolve, reject )=>{
+        let filter = [];
+        for(let i = 0; i < selecciones.length; i++){
+           filter.push(selecciones[i]);
+        };
+        Personaje.find({'_id': { $in: filter}}, 'nombre').exec((err, r) => {
+            resolve(r);
+        });
+    });
+};
+
+app.get('/seleccion/:usuario/personajes', (req, res) => {
+    Seleccion.find({usuario: req.params.usuario})
+        .exec((err, selecciones) => {
+
+            if (err) {
+                return res.status(500).json({
+                    ok: false,
+                    err
+                });
+            }
+
+            let s = selecciones[0] ? selecciones[0].seleccion : [];
+            getNames(s).then((response) => {
+                res.json({
+                    ok: true,
+                    selecciones: response
+                });
+            });
+
 
 
         })
