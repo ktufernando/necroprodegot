@@ -3,7 +3,7 @@ let Personaje = require('../models/personaje');
 const Usuario = require('../models/usuario');
 let Seleccion = require('../models/seleccion');
 
-new CronJob('0 0 * * 1', async() => {
+let cron = new CronJob('* * * * *', async() => {
     console.log('******************** Start Cron *********************');
     try{
         let usuarios = await getUsuarios();
@@ -12,18 +12,20 @@ new CronJob('0 0 * * 1', async() => {
             let aciertos = 0;
             let puntos = 0;
             let seleccion = await getSeleccion(u._id);
-            if(seleccion && seleccion[0].seleccion && seleccion[0].seleccion.length){
-                for(let j = 0; j < seleccion[0].seleccion.length; j++){
-                    let s = seleccion[0].seleccion[j];
-                    let personaje = await getPersonaje(s);
-                    if(personaje.muerto){
-                        ciertos = aciertos + 1;
-                        puntos = puntos + personaje.valor;
+            if(seleccion && seleccion.length){
+                if(seleccion[0].seleccion && seleccion[0].seleccion.length){
+                    for(let j = 0; j < seleccion[0].seleccion.length; j++){
+                        let s = seleccion[0].seleccion[j];
+                        let personaje = await getPersonaje(s);
+                        if(personaje.muerto){
+                            ciertos = aciertos + 1;
+                            puntos = puntos + personaje.valor;
+                        }
                     }
-                }
-                u.aciertos = aciertos;
-                u.puntos = puntos
-                u.save();
+                    u.aciertos = aciertos;
+                    u.puntos = puntos
+                    u.save();
+                } 
             }  
         }
     } catch (e) {
