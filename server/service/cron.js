@@ -18,7 +18,7 @@ let cron = new CronJob('* * * * *', async() => {
                         let s = seleccion[0].seleccion[j];
                         let personaje = await getPersonaje(s);
                         if(personaje.muerto){
-                            ciertos = aciertos + 1;
+                            aciertos = aciertos + 1;
                             puntos = puntos + personaje.valor;
                         }
                     }
