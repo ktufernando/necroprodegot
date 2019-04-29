@@ -3,7 +3,7 @@ let Personaje = require('../models/personaje');
 const Usuario = require('../models/usuario');
 let Seleccion = require('../models/seleccion');
 
-let cron = new CronJob('* * * * *', async() => {
+let cron = new CronJob('1 1 * * 1', async() => {
     console.log('******************** Start Cron *********************');
     try{
         let usuarios = await getUsuarios();

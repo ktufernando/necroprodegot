@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
-//const cron = require('./service/cron');
+const cron = require('./service/cron');
 
 const app = express();
 
